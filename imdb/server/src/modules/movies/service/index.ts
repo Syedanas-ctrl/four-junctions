@@ -228,6 +228,71 @@ export class MovieService extends CrudService<typeof movies> {
       console.error('Error fetching and saving actors:', error);
     }
   };
+
+  overrideupdate = async (req: Request, res: Response) => {
+    try {
+      const id = parseInt(req.params.id);
+      const { data, actors, producerId } = req.body;
+
+      // First check if movie exists
+      const existingMovie = await this.db.select()
+        .from(this.table)
+        .where(eq(this.table.id, id));
+
+      if (existingMovie.length === 0) {
+        throw notFound(this.entityName);
+      }
+
+      // Update movie details if provided
+      if (data) {
+        await this.db.update(this.table)
+          .set(data)
+          .where(eq(this.table.id, id));
+      }
+
+      // Update producer if provided
+      if (producerId) {
+        await this.db.update(this.table)
+          .set({ producerId })
+          .where(eq(this.table.id, id));
+      }
+
+      // Update actors if provided
+      if (actors && Array.isArray(actors)) {
+        // First remove existing actor relations
+        await this.db.delete(movieActors)
+          .where(eq(movieActors.movieId, id));
+
+        // Then add new actor relations
+        for (const actor of actors) {
+          if (actor.actorId && actor.role) {
+            await this.db.insert(movieActors)
+              .values({
+                movieId: id,
+                actorId: actor.actorId,
+                role: actor.role,
+                createdBy: 'system'
+              });
+          }
+        }
+      }
+
+      // Fetch and return updated movie with relations
+      const updatedMovie = await this.db.select()
+        .from(this.table)
+        .where(eq(this.table.id, id));
+
+      const { actors: movieActorsList, producer } = await this.fetchMovieActors(updatedMovie[0]);
+
+      res.json({
+        ...updatedMovie[0],
+        actors: movieActorsList,
+        producer: producer?.[0]
+      });
+    } catch (error) {
+      errorHandler(error as Error, res);
+    }
+  }
 }
 
 // Create and export an instance

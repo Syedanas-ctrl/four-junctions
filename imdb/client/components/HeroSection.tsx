@@ -26,7 +26,7 @@ export function HeroSection() {
         {/* Main Hero Image */}
         <div className="relative w-full h-[450px]">
           <Image
-            src="/placeholder.svg?height=450&width=800"
+            src="https://4kwallpapers.com/images/wallpapers/marvels-avengers-marvel-superheroes-playstation-4-3440x1440-4965.jpg?height=450&width=800"
             alt="I Know What You Did Last Summer"
             width={800}
             height={450}
@@ -36,7 +36,7 @@ export function HeroSection() {
           {/* Movie Poster Thumbnail */}
           <div className="absolute left-6 bottom-6 z-20 w-32 h-44 border border-gray-700 shadow-lg">
             <Image
-              src="/placeholder.svg?height=176&width=128"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsqp15FUcVO6qQ-2QLnFk0TYXU1E17eDrNmw&s?height=176&width=128"
               alt="Movie Poster"
               width={128}
               height={176}
@@ -93,7 +93,7 @@ export function HeroSection() {
           <div className="flex p-4 hover:bg-gray-900 cursor-pointer">
             <div className="w-32 h-20 relative flex-shrink-0">
               <Image
-                src="/placeholder.svg?height=80&width=128"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsqp15FUcVO6qQ-2QLnFk0TYXU1E17eDrNmw&s?height=80&width=128"
                 alt="The Rise of Pedro Pascal"
                 width={128}
                 height={80}
@@ -146,7 +146,7 @@ export function HeroSection() {
           <div className="flex p-4 hover:bg-gray-900 cursor-pointer">
             <div className="w-32 h-20 relative flex-shrink-0">
               <Image
-                src="/placeholder.svg?height=80&width=128"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsqp15FUcVO6qQ-2QLnFk0TYXU1E17eDrNmw&s?height=80&width=128"
                 alt="The Summer I Turned Pretty"
                 width={128}
                 height={80}
@@ -199,7 +199,7 @@ export function HeroSection() {
           <div className="flex p-4 hover:bg-gray-900 cursor-pointer">
             <div className="w-32 h-20 relative flex-shrink-0">
               <Image
-                src="/placeholder.svg?height=80&width=128"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsqp15FUcVO6qQ-2QLnFk0TYXU1E17eDrNmw&s?height=80&width=128"
                 alt="The Last Of Us"
                 width={128}
                 height={80}

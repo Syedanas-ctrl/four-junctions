@@ -19,12 +19,6 @@ export default function IMDbHomepage() {
         <HeroSection />
         <FeaturedToday />
         <PopularCelebrities />
-        {/* <TrendingTrailers /> */}
-        <WhatToWatch />
-        {/* <Ad /> */}
-        <Watchlist />
-        <TopTenMovies />
-        <FanFavorites />
       </main>
     </div>
   )

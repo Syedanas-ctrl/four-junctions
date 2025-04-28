@@ -9,9 +9,10 @@ import { Actor } from '@/lib/types/actors'
 import { Producer } from '@/lib/types/producers'
 import ActorSelectionModal from '@/components/ActorSelectionModal'
 import ProducerSelectionModal from '@/components/ProducerSelectionModal'
-
+import { useToast } from '@/hooks/use-toast'
 export default function EditMoviePage() {
   const { imdbId } = useParams()
+  const { toast } = useToast()
   const router = useRouter()
   const dispatch = useAppDispatch()
   const movie = useAppSelector(selectSelectedMovie)
@@ -176,6 +177,57 @@ export default function EditMoviePage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    
+    // Validate all required fields
+    if (!formData.primaryTitle.trim()) {
+      toast({
+        title: 'Primary Title is required',
+        description: 'Please enter a primary title for the movie',
+      })
+      return
+    }
+    if (!formData.description.trim()) {
+      toast({
+        title: 'Description is required',
+        description: 'Please enter a description for the movie',
+      })
+      return
+    }
+    if (!formData.primaryImage.trim()) {
+      toast({
+        title: 'Primary Image URL is required',
+        description: 'Please enter an image URL for the movie',
+      })
+      return
+    }
+    if (formData.startYear <= 0) {
+      toast({
+        title: 'Start Year is required',
+        description: 'Please enter a valid start year for the movie',
+      })
+      return
+    }
+    if (formData.runtimeMinutes <= 0) {
+      toast({
+        title: 'Runtime is required',
+        description: 'Please enter a valid runtime in minutes',
+      })
+      return
+    }
+    if (formData.genres.length === 0) {
+      toast({
+        title: 'At least one genre is required',
+        description: 'Please add at least one genre for the movie',
+      })
+      return
+    }
+    if (!selectedProducer) {
+      toast({
+        title: 'Producer is required',
+        description: 'Please select a producer for the movie',
+      })
+      return
+    }
     
     const movieData = {
       ...formData,

@@ -132,6 +132,8 @@ const ProducerSelectionModal = ({ isOpen, onClose, onSelect }: ProducerSelection
                       onClick={() => onSelect(producer)}
                       className="flex items-center p-3 rounded text-left bg-gray-800 hover:bg-gray-700"
                     >
+                      {
+                        producer.primaryImage && (
                       <div className="relative h-12 w-12 rounded-full overflow-hidden mr-3">
                         <Image 
                           src={producer.primaryImage || '/producer-placeholder.jpg'} 
@@ -140,6 +142,8 @@ const ProducerSelectionModal = ({ isOpen, onClose, onSelect }: ProducerSelection
                           className="object-cover"
                         />
                       </div>
+                      )
+                      }
                       <div className="flex-1">
                         <p className="font-medium">{producer.fullName}</p>
                       </div>

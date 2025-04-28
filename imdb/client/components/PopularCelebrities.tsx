@@ -20,7 +20,7 @@ export function PopularCelebrities() {
         <div className="text-center cursor-pointer">
           <div className="relative w-32 h-32 mx-auto rounded-full overflow-hidden mb-2">
             <Image
-              src="/placeholder.svg?height=128&width=128"
+              src="https://m.media-amazon.com/images/M/MV5BNzg1MTUyNDYxOF5BMl5BanBnXkFtZTgwNTQ4MTE2MjE@._V1_FMjpg_UX1000_.jpg?height=128&width=128"
               alt="Minka Kelly"
               width={128}
               height={128}
@@ -38,7 +38,7 @@ export function PopularCelebrities() {
         <div className="text-center cursor-pointer">
           <div className="relative w-32 h-32 mx-auto rounded-full overflow-hidden mb-2">
             <Image
-              src="/placeholder.svg?height=128&width=128"
+              src="https://m.media-amazon.com/images/M/MV5BNzg1MTUyNDYxOF5BMl5BanBnXkFtZTgwNTQ4MTE2MjE@._V1_FMjpg_UX1000_.jpg?height=128&width=128"
               alt="Josh Duhamel"
               width={128}
               height={128}
@@ -56,7 +56,7 @@ export function PopularCelebrities() {
         <div className="text-center cursor-pointer">
           <div className="relative w-32 h-32 mx-auto rounded-full overflow-hidden mb-2">
             <Image
-              src="/placeholder.svg?height=128&width=128"
+              src="https://m.media-amazon.com/images/M/MV5BNzg1MTUyNDYxOF5BMl5BanBnXkFtZTgwNTQ4MTE2MjE@._V1_FMjpg_UX1000_.jpg?height=128&width=128"
               alt="Isabela Merced"
               width={128}
               height={128}
@@ -74,7 +74,7 @@ export function PopularCelebrities() {
         <div className="text-center cursor-pointer">
           <div className="relative w-32 h-32 mx-auto rounded-full overflow-hidden mb-2">
             <Image
-              src="/placeholder.svg?height=128&width=128"
+              src="https://m.media-amazon.com/images/M/MV5BNzg1MTUyNDYxOF5BMl5BanBnXkFtZTgwNTQ4MTE2MjE@._V1_FMjpg_UX1000_.jpg?height=128&width=128"
               alt="Kaitlyn Dever"
               width={128}
               height={128}
@@ -92,7 +92,7 @@ export function PopularCelebrities() {
         <div className="text-center cursor-pointer">
           <div className="relative w-32 h-32 mx-auto rounded-full overflow-hidden mb-2">
             <Image
-              src="/placeholder.svg?height=128&width=128"
+              src="https://m.media-amazon.com/images/M/MV5BNzg1MTUyNDYxOF5BMl5BanBnXkFtZTgwNTQ4MTE2MjE@._V1_FMjpg_UX1000_.jpg?height=128&width=128"
               alt="Emma Corrin"
               width={128}
               height={128}
@@ -110,7 +110,7 @@ export function PopularCelebrities() {
         <div className="text-center cursor-pointer">
           <div className="relative w-32 h-32 mx-auto rounded-full overflow-hidden mb-2">
             <Image
-              src="/placeholder.svg?height=128&width=128"
+              src="https://m.media-amazon.com/images/M/MV5BNzg1MTUyNDYxOF5BMl5BanBnXkFtZTgwNTQ4MTE2MjE@._V1_FMjpg_UX1000_.jpg?height=128&width=128"
               alt="Nicky Katt"
               width={128}
               height={128}

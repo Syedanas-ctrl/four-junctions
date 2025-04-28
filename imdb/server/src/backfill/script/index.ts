@@ -29,11 +29,6 @@ async function backfillData() {
         
         try {
           // Use a transaction for each movie insertion
-          const existingMovie = await db.select()
-              .from(movies)
-              .where(eq(movies.imdbId, String(movieData.id)))
-              .limit(1);
-              
           await db.transaction(async (tx) => {
             const existingMovie: Movie[] = await tx.select()
               .from(movies)

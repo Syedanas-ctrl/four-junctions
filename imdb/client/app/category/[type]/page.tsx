@@ -1,7 +1,6 @@
 'use client'
-import Image from "next/image"
 import Link from "next/link"
-import { ChevronDown, ChevronRight, Info, Menu, Search, Share2, Star, Plus } from "lucide-react"
+import { ChevronDown, Share2, Plus } from "lucide-react"
 import { Header } from "@/components/Header"
 import { TopTenMovies } from "@/components/TopTenMovies"
 import { FanFavorites } from "@/components/FanFavorites"
@@ -23,11 +22,9 @@ export default function Page() {
   }, [dispatch, type]);
   return (
     <div className="md:px-36 min-h-screen bg-black">
-      {/* Navigation Bar */}
      <Header />
 
-      {/* Main Content */}
-      <main className="max-w-6xl px-4 py-6 h-screen bg-white text-black">
+      <main className="max-w-6xl px-4 py-6 bg-white text-black">
         <div className="flex justify-between items-center mb-2">
           <h1 className="text-2xl font-bold">IMDb Charts</h1>
           <button className="flex items-center gap-1 text-sm">
@@ -36,7 +33,6 @@ export default function Page() {
         </div>
 
         <div className="flex items-start">
-          {/* Left Content */}
           <div className="flex-1 pr-8">
             <h2 className="text-3xl font-bold border-l-4 border-[#f5c518] pl-3 mb-2">{MovieCategoriesLabels[type as MovieCategories]}</h2>
             <p className="text-sm text-gray-600 mb-6">As rated by regular IMDb voters.</p>
@@ -77,16 +73,13 @@ export default function Page() {
               </div>
             </div>
 
-            {/* Movie List */}
             <MovieList movies={movies} status={status} />
           </div>
 
-          {/* Right Sidebar */}
           <SidebarList />
         </div>
       </main>
       
-      {/* Additional Components */}
       <TopTenMovies />
       <FanFavorites />
     </div>

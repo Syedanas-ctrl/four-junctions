@@ -2,19 +2,21 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { Actor } from '@/lib/types/actors'
 import { API_URL } from '@/lib/constants'
-
+import { useToast } from '@/hooks/use-toast'
 interface ActorCreationFormProps {
   onSuccess: (actor: Actor) => void
   onCancel: () => void
 }
 
 const ActorCreationForm = ({ onSuccess, onCancel }: ActorCreationFormProps) => {
+  const { toast } = useToast()
   const [formData, setFormData] = useState({
     fullName: '',
     primaryImage: '',
     bio: '',
     birthDate: '',
     height: 0,
+    role: '',
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -37,6 +39,51 @@ const ActorCreationForm = ({ onSuccess, onCancel }: ActorCreationFormProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    
+    // Validate all required fields
+    if (!formData.fullName.trim()) {
+      toast({
+        title: 'Full Name is required',
+        description: 'Please enter a full name for the actor',
+      })
+      return
+    }
+    if (!formData.primaryImage.trim()) {
+      toast({
+        title: 'Image URL is required',
+        description: 'Please enter an image URL for the actor',
+      })
+      return
+    }
+    if (!formData.bio.trim()) {
+      toast({
+        title: 'Bio is required',
+        description: 'Please enter a bio for the actor',
+      })
+      return
+    }
+    if (!formData.birthDate) {
+      toast({
+        title: 'Birth Date is required',
+        description: 'Please enter a birth date for the actor',
+      })
+      return
+    }
+    if (formData.height <= 0) {
+      toast({
+        title: 'Height must be greater than 0',
+        description: 'Please enter a height for the actor',
+      })
+      return
+    }
+    if (!formData.role.trim()) {
+      toast({
+        title: 'Role is required',
+        description: 'Please enter a role for the actor',
+      })
+      return
+    }
+
     setIsSubmitting(true)
     setError(null)
 
@@ -154,6 +201,19 @@ const ActorCreationForm = ({ onSuccess, onCancel }: ActorCreationFormProps) => {
                 name="height"
                 value={formData.height}
                 onChange={handleNumberChange}
+                className="mt-1 block w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-white"
+              />
+            </label>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium mb-1">
+              Role
+              <input
+                type="text"
+                name="role"
+                value={formData.role}
+              onChange={handleInputChange}
                 className="mt-1 block w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-white"
               />
             </label>

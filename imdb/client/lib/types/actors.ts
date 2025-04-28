@@ -8,4 +8,5 @@ export interface Actor extends Audit {
     height: number;
     bio: string;
     birthDate: Date;
+    role: string;
   }

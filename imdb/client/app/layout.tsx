@@ -2,6 +2,7 @@ import type React from "react"
 import "./globals.css"
 import type { Metadata } from "next"
 import { ReduxProvider } from "@/lib/redux/provider"
+import { Toaster } from "sonner"
 
 export const metadata: Metadata = {
   title: "IMDb: Ratings, Reviews, and Where to Watch the Best Movies & TV Shows",
@@ -19,6 +20,7 @@ export default function RootLayout({
       <body>
         <ReduxProvider>
           {children}
+          <Toaster richColors position="top-right" />
         </ReduxProvider>
       </body>
     </html>

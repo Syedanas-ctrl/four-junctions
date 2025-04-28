@@ -123,7 +123,28 @@ export default function MovieDetailPage() {
               
               <div>
                 <h3 className="text-lg font-bold mb-2">Producers</h3>
-                <p>{movie.producer?.fullName || 'Unknown Producers'}</p>
+                <div className="flex items-start">
+                
+                {
+                  movie.producer?.primaryImage && (
+                    <div className="flex-shrink-0 relative w-24 h-24 mr-3 rounded-full overflow-hidden">
+                      <Image 
+                        src={movie.producer?.primaryImage} 
+                        alt={movie.producer?.fullName || 'Unknown Producer'}
+                        fill
+                        className="object-cover"
+                  />
+                </div>
+                )
+                }
+                {
+                  movie?.producer && (
+                    <div className='pt-2'>
+                      <p className="font-bold text-blue-400 hover:underline cursor-pointer">{movie.producer.fullName}</p>
+                    </div>
+                  )
+                }
+                </div>
               </div>
             </div>
           </div>
@@ -155,7 +176,7 @@ export default function MovieDetailPage() {
                 </div>
                 <div className='pt-2'>
                   <p className="font-bold text-blue-400 hover:underline cursor-pointer">{actor.fullName}</p>
-                  <p className="text-sm text-gray-200">Character</p>
+                  <p className="text-sm text-gray-200">{actor.role}</p>
                 </div>
               </div>
             ))}

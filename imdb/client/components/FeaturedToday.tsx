@@ -12,7 +12,7 @@ export function FeaturedToday() {
         <div className="relative group cursor-pointer">
           <div className="relative h-[250px] overflow-hidden rounded">
             <Image
-              src="/placeholder.svg?height=250&width=500"
+              src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjnsjBOjhuWOht-gfnfj6YgCdjA4sxOukRErKC5gA0WcpLL6P24KJGkTPwF9SL_g9WmIp-BXV4ibRJuuUqRm3iScqA1vEUM3ixkgMr8JPn4vG7ZasljWw26g3_i5jFmf6VlV0cway5pSH6-/w2560-h1600-c/avengers-endgame-movie-characters-uhdpaper.com-4K-52.jpg?height=250&width=500"
               alt="Hansal Mehta's Favourite Indian Female Actors"
               width={500}
               height={250}
@@ -43,7 +43,7 @@ export function FeaturedToday() {
         <div className="relative group cursor-pointer">
           <div className="relative h-[250px] overflow-hidden rounded">
             <Image
-              src="/placeholder.svg?height=250&width=500"
+              src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjnsjBOjhuWOht-gfnfj6YgCdjA4sxOukRErKC5gA0WcpLL6P24KJGkTPwF9SL_g9WmIp-BXV4ibRJuuUqRm3iScqA1vEUM3ixkgMr8JPn4vG7ZasljWw26g3_i5jFmf6VlV0cway5pSH6-/w2560-h1600-c/avengers-endgame-movie-characters-uhdpaper.com-4K-52.jpg?height=250&width=500"
               alt="Hansal Mehta's List of Breakout Male Talent"
               width={500}
               height={250}
