@@ -1,0 +1,39 @@
+{
+  "name": "imdb-clone",
+  "version": "1.0.0",
+  "description": "IMDB-like website with CRUD operations",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node-dev --transpile-only --respawn src/index.ts",
+    "db:generate": "drizzle-kit generate:mysql",
+    "db:migrate": "ts-node src/db/migrate.ts",
+    "db:drop": "drizzle-kit drop --out=./drizzle",
+    "db:push": "drizzle-kit push:mysql",
+    "db:backfill": "ts-node src/backfill/run-backfill.ts",
+    "lint": "eslint 'src/**/*.{js,ts}'",
+    "format": "prettier --write 'src/**/*.{js,ts}'"
+  },
+  "dependencies": {
+    "axios": "^1.9.0",
+    "cors": "^2.8.5",
+    "dayjs": "^1.11.13",
+    "dotenv": "^16.0.3",
+    "drizzle-orm": "^0.28.5",
+    "express": "^4.18.2",
+    "mysql2": "^3.2.3"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.9.36",
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.17",
+    "@types/node": "^18.15.11",
+    "drizzle-kit": "^0.19.13",
+    "eslint": "^8.38.0",
+    "prettier": "^2.8.7",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.0.4"
+  }
+}

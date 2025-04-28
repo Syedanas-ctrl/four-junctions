@@ -1,0 +1,109 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f5f5f5;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.input-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+label {
+    flex: 1 0 100%;
+    font-weight: bold;
+}
+
+input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.example {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f8f8f8;
+    border-left: 4px solid #4CAF50;
+}
+
+.results {
+    margin-top: 30px;
+}
+
+.result-text {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.visualization-container {
+    overflow-x: auto;
+}
+
+#svg-container {
+    margin: 20px auto;
+    min-height: 300px;
+}
+
+svg {
+    display: block;
+    margin: 0 auto;
+}
+
+rect.block {
+    fill: #2196F3;
+    stroke: #1565C0;
+    stroke-width: 1;
+}
+
+rect.water {
+    fill: #FFEB3B;
+    stroke: #FDD835;
+    stroke-width: 1;
+    opacity: 0.8;
+}
+
+rect.grid {
+    fill: transparent;
+    stroke: #ccc;
+    stroke-width: 1;
+} 

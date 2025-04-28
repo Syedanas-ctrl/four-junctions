@@ -1,0 +1,1 @@
+ALTER TABLE `movie_actors` ADD `role` varchar(100);

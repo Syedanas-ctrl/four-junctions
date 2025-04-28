@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Tank Visualization</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Water Tank Visualization</h1>
+        
+        <div class="input-section">
+            <label for="heights">Enter block heights (comma-separated):</label>
+            <input type="text" id="heights" placeholder="0,4,0,0,0,6,0,6,4,0">
+            <button id="calculate">Calculate</button>
+        </div>
+        
+        <div class="example">
+            <p>Example: [0,4,0,0,0,6,0,6,4,0] = 18 units of water</p>
+        </div>
+        
+        <div class="results">
+            <div class="result-text">
+                <h2>Water trapped: <span id="water-units">0</span> Units</h2>
+            </div>
+            
+            <div class="visualization-container">
+                <h3>Visualization:</h3>
+                <div id="svg-container"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html> 
