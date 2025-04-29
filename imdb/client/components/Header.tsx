@@ -2,12 +2,42 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { ChevronDown, Menu, Search, X } from "lucide-react"
-import { useState } from "react"
-import { MovieCategories, MovieCategoriesLabels } from "@/lib/types/movies"
+import { Menu, Search, X } from "lucide-react"
+import { useState, useEffect, useCallback } from "react"
+import { Movie, MovieCategories, MovieCategoriesLabels } from "@/lib/types/movies"
+import { API_URL } from "@/lib/constants"
+import dayjs from "dayjs"
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [searchTerm, setSearchTerm] = useState('')
+  const [searchResults, setSearchResults] = useState<Movie[]>([])
+  const [showResults, setShowResults] = useState(false)
+
+  const handleSearch = useCallback(async () => {
+    if (searchTerm.trim() === '') {
+      setSearchResults([])
+      setShowResults(false)
+      return
+    }
+
+    const response = await fetch(`${API_URL}/api/movies/search/${searchTerm}`)
+    const data = await response.json()
+    setSearchResults(data)
+    setShowResults(true)
+  }, [searchTerm])
+
+  useEffect(() => {
+    const debounceTimer = setTimeout(() => {
+      if (searchTerm) {
+        handleSearch()
+      }
+    }, 600) // 300ms delay
+
+    return () => {
+      clearTimeout(debounceTimer) // Clean up the timer on each searchTerm change
+    }
+  }, [searchTerm, handleSearch])
 
   return (
     <>
@@ -33,10 +63,46 @@ export function Header() {
 
         <div className="flex items-center mx-4 flex-1">
           <div className="relative flex items-center w-full max-w-xl">
-            <input type="text" placeholder="Search IMDb" className="w-full px-4 py-1.5 text-black" />
-            <button disabled className="absolute right-0 px-2">
+            <input 
+              onChange={(e) => setSearchTerm(e.target.value)}
+              type="text" 
+              placeholder="Search IMDb" 
+              className="w-full px-4 py-1.5 text-black"
+              onFocus={() => setShowResults(true)}
+              onBlur={() => {
+                setTimeout(() => setShowResults(false), 200)
+              }}
+            />
+            <button className="absolute right-0 px-2">
               <Search className="w-5 h-5 text-gray-500" />
             </button>
+
+            {/* Search Results Dropdown */}
+            {showResults && searchResults.length > 0 && (
+              <div className="absolute top-full left-0 right-0 bg-white text-black mt-1 rounded-md shadow-lg z-50 max-h-96 overflow-y-auto">
+                {searchResults.map((movie, index) => (
+                  <Link
+                    key={movie.imdbId || index}
+                    href={`/movie/${movie.imdbId}`}
+                    className="flex items-center gap-3 p-3 hover:bg-gray-100 transition-colors"
+                  >
+                    {movie.primaryImage && (
+                      <Image
+                        src={movie.primaryImage}
+                        alt={movie.primaryTitle}
+                        width={40}
+                        height={60}
+                        className="object-cover rounded"
+                      />
+                    )}
+                    <div>
+                      <div className="font-medium">{movie.primaryTitle}</div>
+                      <div className="text-sm text-gray-500">{dayjs(movie.releaseDate).format('YYYY')}</div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </header>

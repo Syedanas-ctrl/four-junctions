@@ -17,6 +17,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // API routes
+app.get('/', (req: Request, res: Response) => {
+  res.json({ message: 'Welcome to the IMDB API' });
+});
 app.use('/api/actors', actorsRouter);
 app.use('/api/movies', moviesRouter);
 app.use('/api/producers', producersRouter);
@@ -28,5 +31,5 @@ app.use((req: Request, res: Response) => {
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on port http://localhost:${PORT}`);
 });

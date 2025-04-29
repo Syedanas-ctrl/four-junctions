@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { eq } from 'drizzle-orm';
-import { ApiError, errorHandler, notFound } from './errorHandler';
+import { eq, like } from 'drizzle-orm';
+import { errorHandler, notFound } from './errorHandler';
 
 export interface CrudServiceOptions {
   table: any;
@@ -65,6 +65,16 @@ export class CrudService<T = any> {
       errorHandler(error as Error, res);
     }
   };
+
+  searchByName = async (req: Request, res: Response) => {
+    try {
+      const name = req.params.name;
+      const entity = await this.db.select().from(this.table).where(like( this.entityName === 'Movie' ? this.table.primaryTitle : this.table.fullName, `%${name}%`));
+      res.json(entity);
+    } catch (error) {
+      errorHandler(error as Error, res);
+    }
+  }
 
   create = async (req: Request, res: Response) => {
     try {

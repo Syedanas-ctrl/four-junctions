@@ -17,7 +17,7 @@ const ActorSelectionModal = ({ isOpen, onClose, onSelect, selectedActorIds }: Ac
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
   const [filteredActors, setFilteredActors] = useState<Actor[]>([])
-  const [showCreationForm, setShowCreationForm] = useState(false)
+  const [showCreationForm, setShowCreationForm] = useState(false);
 
   useEffect(() => {
     const fetchActors = async () => {
@@ -39,6 +39,12 @@ const ActorSelectionModal = ({ isOpen, onClose, onSelect, selectedActorIds }: Ac
       fetchActors()
     }
   }, [isOpen])
+
+  const handleSearch = async () => {
+    const response = await fetch(`${API_URL}/api/actors/search/${searchTerm}`)
+    const data = await response.json()
+    setFilteredActors(data)
+  }
 
   useEffect(() => {
     if (searchTerm) {
@@ -100,11 +106,11 @@ const ActorSelectionModal = ({ isOpen, onClose, onSelect, selectedActorIds }: Ac
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
                 </div>
                 <button 
-                  onClick={() => setShowCreationForm(true)}
+                  onClick={handleSearch}
                   className="flex items-center gap-1 bg-blue-600 text-white px-3 py-2 rounded hover:bg-blue-500"
                 >
-                  <Plus size={18} />
-                  New Actor
+                  <Search size={18} />
+                  Search
                 </button>
               </div>
             </div>

@@ -1,0 +1,1 @@
+ALTER TABLE `movies` MODIFY COLUMN `producer_id` int;

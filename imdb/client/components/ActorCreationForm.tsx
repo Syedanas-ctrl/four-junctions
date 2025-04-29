@@ -2,14 +2,12 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { Actor } from '@/lib/types/actors'
 import { API_URL } from '@/lib/constants'
-import { useToast } from '@/hooks/use-toast'
 interface ActorCreationFormProps {
   onSuccess: (actor: Actor) => void
   onCancel: () => void
 }
 
 const ActorCreationForm = ({ onSuccess, onCancel }: ActorCreationFormProps) => {
-  const { toast } = useToast()
   const [formData, setFormData] = useState({
     fullName: '',
     primaryImage: '',
@@ -42,45 +40,27 @@ const ActorCreationForm = ({ onSuccess, onCancel }: ActorCreationFormProps) => {
     
     // Validate all required fields
     if (!formData.fullName.trim()) {
-      toast({
-        title: 'Full Name is required',
-        description: 'Please enter a full name for the actor',
-      })
+      window.alert('Full Name is required. Please enter a full name for the actor')
       return
     }
     if (!formData.primaryImage.trim()) {
-      toast({
-        title: 'Image URL is required',
-        description: 'Please enter an image URL for the actor',
-      })
+      window.alert('Image URL is required. Please enter an image URL for the actor')
       return
     }
     if (!formData.bio.trim()) {
-      toast({
-        title: 'Bio is required',
-        description: 'Please enter a bio for the actor',
-      })
+      window.alert('Bio is required. Please enter a bio for the actor')
       return
     }
     if (!formData.birthDate) {
-      toast({
-        title: 'Birth Date is required',
-        description: 'Please enter a birth date for the actor',
-      })
+      window.alert('Birth Date is required. Please enter a birth date for the actor')
       return
     }
     if (formData.height <= 0) {
-      toast({
-        title: 'Height must be greater than 0',
-        description: 'Please enter a height for the actor',
-      })
+      window.alert('Height must be greater than 0. Please enter a height for the actor')
       return
     }
     if (!formData.role.trim()) {
-      toast({
-        title: 'Role is required',
-        description: 'Please enter a role for the actor',
-      })
+      window.alert('Role is required. Please enter a role for the actor')
       return
     }
 

@@ -5,6 +5,7 @@ const router = Router();
 
 // CRUD routes
 router.get('/', producerService.getAll);
+router.get('/search/:name', producerService.searchByName);
 router.get('/:id', producerService.getById);
 router.get('/imdb/:id', producerService.getByImdbId);
 router.post('/', producerService.create);

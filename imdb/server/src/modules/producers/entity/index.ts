@@ -1,5 +1,5 @@
 import { int, mysqlTable, text, varchar } from 'drizzle-orm/mysql-core';
-import { auditFields } from '../../../db/schema';
+import { auditFields } from '../../../db/audit';
 import { movies } from '../../movies/entity';
 import { relations } from 'drizzle-orm';
 

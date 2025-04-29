@@ -2,14 +2,12 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { Producer } from '@/lib/types/producers'
 import { API_URL } from '@/lib/constants'
-import { useToast } from '@/hooks/use-toast'
 interface ProducerCreationFormProps {
   onSuccess: (producer: Producer) => void
   onCancel: () => void
 }
 
 const ProducerCreationForm = ({ onSuccess, onCancel }: ProducerCreationFormProps) => {
-  const { toast } = useToast()
   const [formData, setFormData] = useState({
     fullName: '',
     primaryImage: '',
@@ -41,38 +39,23 @@ const ProducerCreationForm = ({ onSuccess, onCancel }: ProducerCreationFormProps
 
     // Validate all required fields
     if (!formData.fullName.trim()) {
-      toast({
-        title: 'Full Name is required',
-        description: 'Please enter a full name for the producer',
-      })
+      window.alert('Full Name is required. Please enter a full name for the producer')
       return
     }
     if (!formData.primaryImage.trim()) {
-      toast({
-        title: 'Image URL is required',
-        description: 'Please enter an image URL for the producer',
-      })
+      window.alert('Image URL is required. Please enter an image URL for the producer')
       return
     }
     if (!formData.bio.trim()) {
-      toast({
-        title: 'Bio is required',
-        description: 'Please enter a bio for the producer',
-      })
+      window.alert('Bio is required. Please enter a bio for the producer')
       return
     }
     if (!formData.birthDate) {
-      toast({
-        title: 'Birth Date is required',
-        description: 'Please enter a birth date for the producer',
-      })
+      window.alert('Birth Date is required. Please enter a birth date for the producer')
       return
     }
     if (formData.height <= 0) {
-      toast({
-        title: 'Height must be greater than 0',
-        description: 'Please enter a height for the producer',
-      })
+      window.alert('Height must be greater than 0. Please enter a height for the producer')
       return
     }
 

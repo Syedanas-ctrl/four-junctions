@@ -1,6 +1,6 @@
-import { mysqlTable, varchar, int, text } from 'drizzle-orm/mysql-core';
+import { mysqlTable, varchar, int, text, bigint } from 'drizzle-orm/mysql-core';
 import { json } from 'drizzle-orm/mysql-core';
-import { auditFields } from '../../../db/schema';
+import { auditFields } from '../../../db/audit';
 import { producers } from '../../producers/entity';
 import { movieActors } from '../../actors/entity';
 import { relations } from 'drizzle-orm';
@@ -23,14 +23,14 @@ export const movies = mysqlTable('movies', {
     externalLinks: json('external_links'), // Stored as JSON string
     spokenLanguages: json('spoken_languages'), // Stored as JSON string
     filmingLocations: json('filming_locations'), // Stored as JSON string
-    budget: int('budget'),
-    grossWorldwide: int('gross_worldwide'),
+    budget: bigint('budget', { mode: 'number' }),
+    grossWorldwide: bigint('gross_worldwide', { mode: 'number' }),
     genres: json('genres'), // Stored as JSON string
     isAdult: int('is_adult').default(0),
     runtimeMinutes: int('runtime_minutes'),
     averageRating: int('average_rating'),
-    numVotes: int('num_votes'),
-    producerId: int('producer_id').notNull().references(() => producers.id),
+    numVotes: bigint('num_votes', { mode: 'number' }),
+    producerId: int('producer_id').references(() => producers.id),
     categories: json('categories'), //Eg: Top 250, Top rated tamil movies, etc
     ...auditFields,
   });

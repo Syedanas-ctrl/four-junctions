@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.moviesRelations = exports.movies = void 0;
 const mysql_core_1 = require("drizzle-orm/mysql-core");
 const mysql_core_2 = require("drizzle-orm/mysql-core");
-const schema_1 = require("../../../db/schema");
+const audit_1 = require("../../../db/audit");
 const entity_1 = require("../../producers/entity");
 const entity_2 = require("../../actors/entity");
 const drizzle_orm_1 = require("drizzle-orm");
@@ -25,16 +25,16 @@ exports.movies = (0, mysql_core_1.mysqlTable)('movies', {
     externalLinks: (0, mysql_core_2.json)('external_links'), // Stored as JSON string
     spokenLanguages: (0, mysql_core_2.json)('spoken_languages'), // Stored as JSON string
     filmingLocations: (0, mysql_core_2.json)('filming_locations'), // Stored as JSON string
-    budget: (0, mysql_core_1.int)('budget'),
-    grossWorldwide: (0, mysql_core_1.int)('gross_worldwide'),
+    budget: (0, mysql_core_1.bigint)('budget', { mode: 'number' }),
+    grossWorldwide: (0, mysql_core_1.bigint)('gross_worldwide', { mode: 'number' }),
     genres: (0, mysql_core_2.json)('genres'), // Stored as JSON string
     isAdult: (0, mysql_core_1.int)('is_adult').default(0),
     runtimeMinutes: (0, mysql_core_1.int)('runtime_minutes'),
     averageRating: (0, mysql_core_1.int)('average_rating'),
-    numVotes: (0, mysql_core_1.int)('num_votes'),
-    producerId: (0, mysql_core_1.int)('producer_id').notNull().references(() => entity_1.producers.id),
+    numVotes: (0, mysql_core_1.bigint)('num_votes', { mode: 'number' }),
+    producerId: (0, mysql_core_1.int)('producer_id').references(() => entity_1.producers.id),
     categories: (0, mysql_core_2.json)('categories'), //Eg: Top 250, Top rated tamil movies, etc
-    ...schema_1.auditFields,
+    ...audit_1.auditFields,
 });
 exports.moviesRelations = (0, drizzle_orm_1.relations)(exports.movies, ({ one, many }) => ({
     producer: one(entity_1.producers, {

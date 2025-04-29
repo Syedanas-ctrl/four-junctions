@@ -1,6 +1,6 @@
 import { int, text } from "drizzle-orm/mysql-core";
 
-import { auditFields } from "../../../db/schema";
+import { auditFields } from "../../../db/audit";
 import { mysqlTable, primaryKey, varchar } from 'drizzle-orm/mysql-core';
 import { movies } from "../../movies/entity";
 import { relations } from "drizzle-orm";

@@ -229,10 +229,10 @@ export class MovieService extends CrudService<typeof movies> {
     }
   };
 
-  overrideupdate = async (req: Request, res: Response) => {
+  override update = async (req: Request, res: Response) => {
     try {
       const id = parseInt(req.params.id);
-      const { data, actors, producerId } = req.body;
+      const { actors, producer: producerData, ...data } = req.body;
 
       // First check if movie exists
       const existingMovie = await this.db.select()
@@ -251,9 +251,9 @@ export class MovieService extends CrudService<typeof movies> {
       }
 
       // Update producer if provided
-      if (producerId) {
+      if (producerData?.id) {
         await this.db.update(this.table)
-          .set({ producerId })
+          .set({ producerId: producerData.id })
           .where(eq(this.table.id, id));
       }
 
@@ -265,11 +265,11 @@ export class MovieService extends CrudService<typeof movies> {
 
         // Then add new actor relations
         for (const actor of actors) {
-          if (actor.actorId && actor.role) {
+          if (actor.id && actor.role) {
             await this.db.insert(movieActors)
               .values({
                 movieId: id,
-                actorId: actor.actorId,
+                actorId: actor.id,
                 role: actor.role,
                 createdBy: 'system'
               });

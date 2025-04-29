@@ -39,6 +39,12 @@ const ProducerSelectionModal = ({ isOpen, onClose, onSelect }: ProducerSelection
     }
   }, [isOpen])
 
+  const handleSearch = async () => {
+    const response = await fetch(`${API_URL}/api/producers/search/${searchTerm}`)
+    const data = await response.json()
+    setFilteredProducers(data)
+  }
+
   useEffect(() => {
     if (searchTerm) {
       const filtered = producers.filter(producer => 
@@ -99,11 +105,11 @@ const ProducerSelectionModal = ({ isOpen, onClose, onSelect }: ProducerSelection
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
                 </div>
                 <button 
-                  onClick={() => setShowCreationForm(true)}
+                  onClick={handleSearch}
                   className="flex items-center gap-1 bg-blue-600 text-white px-3 py-2 rounded hover:bg-blue-500"
                 >
-                  <Plus size={18} />
-                  New Producer
+                  <Search size={18} />
+                  Search
                 </button>
               </div>
             </div>
