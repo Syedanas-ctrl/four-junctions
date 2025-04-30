@@ -210,10 +210,10 @@ class MovieService extends crudService_1.CrudService {
                 console.error('Error fetching and saving actors:', error);
             }
         };
-        this.overrideupdate = async (req, res) => {
+        this.update = async (req, res) => {
             try {
                 const id = parseInt(req.params.id);
-                const { data, actors, producerId } = req.body;
+                const { actors, producer: producerData, ...data } = req.body;
                 // First check if movie exists
                 const existingMovie = await this.db.select()
                     .from(this.table)
@@ -228,9 +228,9 @@ class MovieService extends crudService_1.CrudService {
                         .where((0, drizzle_orm_1.eq)(this.table.id, id));
                 }
                 // Update producer if provided
-                if (producerId) {
+                if (producerData?.id) {
                     await this.db.update(this.table)
-                        .set({ producerId })
+                        .set({ producerId: producerData.id })
                         .where((0, drizzle_orm_1.eq)(this.table.id, id));
                 }
                 // Update actors if provided
@@ -240,11 +240,11 @@ class MovieService extends crudService_1.CrudService {
                         .where((0, drizzle_orm_1.eq)(entity_2.movieActors.movieId, id));
                     // Then add new actor relations
                     for (const actor of actors) {
-                        if (actor.actorId && actor.role) {
+                        if (actor.id && actor.role) {
                             await this.db.insert(entity_2.movieActors)
                                 .values({
                                 movieId: id,
-                                actorId: actor.actorId,
+                                actorId: actor.id,
                                 role: actor.role,
                                 createdBy: 'system'
                             });

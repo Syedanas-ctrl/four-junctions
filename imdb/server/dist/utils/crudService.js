@@ -40,6 +40,16 @@ class CrudService {
                 (0, errorHandler_1.errorHandler)(error, res);
             }
         };
+        this.searchByName = async (req, res) => {
+            try {
+                const name = req.params.name;
+                const entity = await this.db.select().from(this.table).where((0, drizzle_orm_1.like)(this.entityName === 'Movie' ? this.table.primaryTitle : this.table.fullName, `%${name}%`));
+                res.json(entity);
+            }
+            catch (error) {
+                (0, errorHandler_1.errorHandler)(error, res);
+            }
+        };
         this.create = async (req, res) => {
             try {
                 const result = await this.db.insert(this.table).values({
