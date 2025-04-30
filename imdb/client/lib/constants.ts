@@ -1,3 +1,3 @@
-const API_URL = 'http://localhost:3000';
+const API_URL = 'https://four-junctions.up.railway.app';
 
 export { API_URL };

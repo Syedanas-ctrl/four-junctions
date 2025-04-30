@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import actorsRouter from './modules/actors/controller';
 import moviesRouter from './modules/movies/controller';
 import producersRouter from './modules/producers/controller';
+import { backfillData } from './backfill/script';
 
 // Load environment variables
 dotenv.config();
@@ -19,6 +20,13 @@ app.use(express.urlencoded({ extended: true }));
 // API routes
 app.get('/', (req: Request, res: Response) => {
   res.json({ message: 'Welcome to the IMDB API' });
+});
+app.get('/backfill', async (req: Request, res: Response) => {
+  await backfillData().then(() => {
+    res.json({ message: 'Backfill completed successfully' });
+  }).catch((error) => {
+    res.status(500).json({ error: error.message });
+  });
 });
 app.use('/api/actors', actorsRouter);
 app.use('/api/movies', moviesRouter);
