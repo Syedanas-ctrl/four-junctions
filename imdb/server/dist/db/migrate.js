@@ -11,7 +11,7 @@ const path_1 = __importDefault(require("path"));
 dotenv_1.default.config();
 const runMigrations = async () => {
     const connectionString = process.env.DATABASE_URL || 'mysql://user:password@localhost:3306/imdb_db';
-    console.log('Running migrations...');
+    console.log('Running migrations...', connectionString, process.env.DATABASE_URL);
     const connection = await promise_1.default.createConnection({
         uri: connectionString,
     });

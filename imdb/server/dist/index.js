@@ -9,6 +9,7 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const controller_1 = __importDefault(require("./modules/actors/controller"));
 const controller_2 = __importDefault(require("./modules/movies/controller"));
 const controller_3 = __importDefault(require("./modules/producers/controller"));
+const script_1 = require("./backfill/script");
 // Load environment variables
 dotenv_1.default.config();
 const app = (0, express_1.default)();
@@ -20,6 +21,13 @@ app.use(express_1.default.urlencoded({ extended: true }));
 // API routes
 app.get('/', (req, res) => {
     res.json({ message: 'Welcome to the IMDB API' });
+});
+app.get('/backfill', async (req, res) => {
+    await (0, script_1.backfillData)().then(() => {
+        res.json({ message: 'Backfill completed successfully' });
+    }).catch((error) => {
+        res.status(500).json({ error: error.message });
+    });
 });
 app.use('/api/actors', controller_1.default);
 app.use('/api/movies', controller_2.default);
