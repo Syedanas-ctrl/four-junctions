@@ -1,10 +1,5 @@
 function maxProfit(n) {
-    if (isNaN(n)) {
-        return {
-            earnings: 0,
-            solution: 'Invalid input'
-        };
-    }
+    if (isNaN(n)) return { earnings: 0, solution: 'Invalid input', allSolutions: [] };
     
     // Property definitions
     const properties = [
@@ -15,45 +10,66 @@ function maxProfit(n) {
 
     // DP arrays
     const dp = Array(n + 1).fill(0);
-    const choice = Array(n + 1).fill(null);
+    const choices = Array(n + 1).fill().map(() => []);
 
     // DP computation
     for (let t = 1; t <= n; t++) {
         for (let i = 0; i < properties.length; i++) {
-            const { name, time, earning } = properties[i];
+            const { time, earning } = properties[i];
             if (t >= time) {
-                // Calculate operational time and earnings
-                const operationalTime = t - time;  // Time building is operational
-                const totalEarning = operationalTime * earning;
+                const operationalTime = t - time;
+                const potentialEarning = dp[t - time] + operationalTime * earning;
                 
-                if (dp[t] < dp[t - time] + totalEarning) {
-                    dp[t] = dp[t - time] + totalEarning;
-                    choice[t] = i; // store index of property chosen
+                if (potentialEarning > dp[t]) {
+                    dp[t] = potentialEarning;
+                    choices[t] = [[i, t - time]]; // [property index, remaining time]
+                } else if (potentialEarning === dp[t]) {
+                    choices[t].push([i, t - time]);
                 }
             }
         }
     }
 
-    // Reconstruct solution
-    let t = n;
-    const count = [0, 0, 0]; // [Theatre, Pub, Commercial Park]
-    while (t > 0 && choice[t] !== null) {
-        const idx = choice[t];
-        count[idx]++;
-        t -= properties[idx].time;
+    // Find all solutions
+    const allSolutions = new Set();
+    
+    function buildSolutions(time, solution) {
+        if (time <= 0) {
+            const count = [0, 0, 0]; // [T, P, C]
+            solution.forEach(idx => count[idx]++);
+            allSolutions.add(`T: ${count[0]} P: ${count[1]} C: ${count[2]}`);
+            return;
+        }
+        
+        if (!choices[time] || choices[time].length === 0) {
+            if (dp[time] === 0) {
+                const count = [0, 0, 0];
+                solution.forEach(idx => count[idx]++);
+                allSolutions.add(`T: ${count[0]} P: ${count[1]} C: ${count[2]}`);
+            }
+            return;
+        }
+        
+        for (const [propIdx, nextTime] of choices[time]) {
+            buildSolutions(nextTime, [...solution, propIdx]);
+        }
     }
-
-    // Output
+    
+    buildSolutions(n, []);
+    
+    const solutions = [...allSolutions];
+    
     return {
         earnings: dp[n],
-        solution: `T: ${count[0]} P: ${count[1]} C: ${count[2]}`
+        solution: solutions[0] || 'T: 0 P: 0 C: 0',
+        allSolutions: solutions
     };
 }
 
 // Example usage:
-console.log(maxProfit(0));  
-console.log(maxProfit(0/0));  
+console.log(maxProfit(0));
+console.log(maxProfit(0/0));
 console.log(maxProfit(7));
-console.log(maxProfit(8));  
-console.log(maxProfit(13)); 
-console.log(maxProfit(49)); 
+console.log(maxProfit(8));
+console.log(maxProfit(13));
+console.log(maxProfit(49));
